@@ -1,5 +1,6 @@
 package com.example.ubun.service.impl;
 
+import com.example.ubun.config.annotation.Log;
 import com.example.ubun.mapper.SysUserMapper;
 import com.example.ubun.pojo.model.SysUser;
 import com.example.ubun.service.SysUserService;
@@ -11,7 +12,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper;
 
-
+    @Log()
     @Override
     public SysUser login(String username, String password) {
         return sysUserMapper.login(username,password);
