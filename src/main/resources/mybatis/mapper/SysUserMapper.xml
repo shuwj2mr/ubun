@@ -24,6 +24,13 @@
         where ID = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="login" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sysuser
+        where USERNAME = #{username,jdbcType=VARCHAR} and PASSWORD = #{password,jdbcType=VARCHAR} limit 1
+    </select>
+
     <insert id="insertSelective" parameterType="com.example.ubun.pojo.model.SysUser">
         insert into sysuser
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -2,6 +2,7 @@ package com.example.ubun.mapper;
 
 import com.example.ubun.pojo.model.SysUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SysUserMapper {
@@ -16,4 +17,7 @@ public interface SysUserMapper {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
+
+    SysUser login(@Param("username") String username
+            , @Param("password") String password);
 }
