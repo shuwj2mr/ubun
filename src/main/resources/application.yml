@@ -1,3 +1,4 @@
+# https://docs.spring.io/spring-boot/docs/2.0.4.RELEASE/reference/htmlsingle/#common-application-properties \u5177\u4F53\u914D\u7F6E
 server:
   port: 8080
 
