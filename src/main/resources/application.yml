@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+# \u6570\u636E\u6E90
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ubun?characterEncoding=UTF8&amp;serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name : com.mysql.jdbc.Driver
+
+mybatis:
+  config-location: classpath:mybatis/config/mybatis.cfg.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
