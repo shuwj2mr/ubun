@@ -18,7 +18,6 @@ public class LogAspect {
      * https://www.cnblogs.com/gdwkong/p/9307673.html
      * https://www.cnblogs.com/wangshen31/p/9379197.html  ******
      */
-
     @Pointcut("@annotation(com.example.ubun.config.annotation.Log)")
     public void annotationPointcut() { };
 
