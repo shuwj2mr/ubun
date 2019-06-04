@@ -5,7 +5,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource(value = "classpath:config/common.properties",encoding = "utf-8")    //注入不了
+@PropertySource(value = "classpath:config/common.properties"
+        , ignoreResourceNotFound = true
+        , encoding = "utf-8")
 public class UploadUtils {
     @Value("${upload.url}")
     private String uploadurl;
