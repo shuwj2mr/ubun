@@ -2,6 +2,8 @@
 server:
   port: 8080
 
+
+
 # \u6570\u636E\u6E90
 spring:
   datasource:
@@ -9,6 +11,11 @@ spring:
     username: root
     password: root
     driver-class-name : com.mysql.jdbc.Driver
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10M
+      max-request-size: 100M
 
 mybatis:
   config-location: classpath:mybatis/config/mybatis.cfg.xml
