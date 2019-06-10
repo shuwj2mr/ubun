@@ -4,7 +4,9 @@ import com.example.ubun.config.common.ResponseUtils;
 import com.example.ubun.config.common.ResponseWrapper;
 import com.example.ubun.config.value.UploadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +23,12 @@ public class UploadController {
     @Autowired
     private UploadUtils uploadUtils;
 
-    @RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
+    @RequestMapping("/load")
+    public String load(){
+        return "load....";
+    }
+
+    @RequestMapping(value = "/uploadFile")
     public  ResponseWrapper uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
         try {
             List<MultipartFile> multipartFiles = Arrays.asList (files);
