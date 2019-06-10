@@ -4,10 +4,7 @@ import com.example.ubun.config.common.ResponseUtils;
 import com.example.ubun.config.common.ResponseWrapper;
 import com.example.ubun.config.value.UploadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,13 +16,13 @@ import java.util.List;
 import java.util.UUID;
 
 //文件上传
-@Controller
+@RestController
 public class UploadController {
     @Autowired
     private UploadUtils uploadUtils;
 
-    @RequestMapping(value = "/uploadFile")
-    public @ResponseBody ResponseWrapper uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+    @RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
+    public  ResponseWrapper uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
         try {
             List<MultipartFile> multipartFiles = Arrays.asList (files);
 

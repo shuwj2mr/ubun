@@ -12,7 +12,7 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
-    @RequestMapping("login")
+    @RequestMapping("/login")
     public void login(@RequestParam() String username,
                       @RequestParam() String password) {
         SysUser sysUser = sysUserService.login (username, password);
