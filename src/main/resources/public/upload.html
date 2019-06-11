@@ -9,18 +9,26 @@
 <body>
 <form action="/uploadFile" method="post" enctype="multipart/form-data">
     文件:<input type="file" name="files" multiple="multiple">
-    <input type="submit" value="提交">
-    <!--<button onclick="sub()">提交</button>-->
+    <!--<input type="submit" value="提交">-->
+    <button onclick="sub()">提交</button>
 </form>
 </body>
 </html>
 <script>
     function sub() {
+        var file = $("input[name='files']").files;
+        var formData = new FormData();
+        formData.append("files", file);
         $.ajax({
             url: '/uploadFile',
             type: 'post',
             dataType: 'json',
             data: formData,
+            //--测试情况
+            cache: false,
+            contentType: false,
+            processData: false,
+            //
             success: function (data) {
                 alert(data.success);
             }
