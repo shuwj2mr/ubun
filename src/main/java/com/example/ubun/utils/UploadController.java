@@ -43,7 +43,7 @@ public class UploadController {
                 if (!dir.exists ()) {
                     dir.mkdirs ();
                 }
-                path = UUID.randomUUID ().toString ().substring (0, 8) + System.currentTimeMillis () + type;
+                path = UUID.randomUUID ().toString ().substring (0, 8) + System.currentTimeMillis () +"."+type;
                 file.transferTo (new File (path));
                 list.add (path);
             }
