@@ -24,14 +24,31 @@
             type: 'post',
             dataType: 'json',
             data: formData,
-            //--测试情况
             cache: false,
             contentType: false,
             processData: false,
-            //
             success: function (data) {
-                alert(data.success);
+                console.log("上传成功")
+            },
+            xhr: function(){   //监听用于上传显示进度
+                var xhr = $.ajaxSettings.xhr();
+                if(xhr.upload) {
+                    xhr.upload.addEventListener("progress" , onprogress, false);
+                    return xhr;
+                }
+            },
+            error: function () {
+                console.log("上传失败")
             }
-        })
+        });
+
+        function onprogress(event){
+            if (e.lengthComputable) {
+                //e.loaded 上传大小
+                //e.total 文件大小
+                var percent = e.loaded/e.total;
+                console.log("百分比为:per"+percent);
+            }
+        };
     }
 </script>
