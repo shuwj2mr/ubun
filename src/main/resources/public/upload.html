@@ -5,50 +5,57 @@
     <meta charset="UTF-8">
     <title>文件上传</title>
     <script type="text/javascript" src="../static/js/jquery.js"></script>
+    <style>
+        #l1,#l2{
+            color: red;
+        }
+    </style>
 </head>
 <body>
-<form action="/uploadFile" method="post" enctype="multipart/form-data">
-    文件:<input type="file" name="files" multiple="multiple">
-    <!--<input type="submit" value="提交">-->
-    <button onclick="sub()">提交</button>
-</form>
+<p id="l1">1</p>
+<p id="l2">2</p>
+<!--<form action="/uploadFile" method="post" enctype="multipart/form-data">-->
+    <!--文件:<input type="file" name="files" multiple="multiple">-->
+    <!--&lt;!&ndash;<input type="submit" value="提交">&ndash;&gt;-->
+    <!--<button onclick="sub()">提交</button>-->
+<!--</form>-->
 </body>
 </html>
 <script>
-    function sub() {
-        var file = $("input[name='files']").files;
-        var formData = new FormData();
-        formData.append("files", file);
-        $.ajax({
-            url: '/uploadFile',
-            type: 'post',
-            dataType: 'json',
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                console.log("上传成功")
-            },
-            xhr: function(){   //监听用于上传显示进度
-                var xhr = $.ajaxSettings.xhr();
-                if(xhr.upload) {
-                    xhr.upload.addEventListener("progress" , onprogress, false);
-                    return xhr;
-                }
-            },
-            error: function () {
-                console.log("上传失败")
-            }
-        });
-
-        function onprogress(event){
-            if (e.lengthComputable) {
-                //e.loaded 上传大小
-                //e.total 文件大小
-                var percent = e.loaded/e.total;
-                console.log("百分比为:per"+percent);
-            }
-        };
-    }
+    // function sub() {
+    //     var file = $("input[name='files']").files;
+    //     var formData = new FormData();
+    //     formData.append("files", file);
+    //     $.ajax({
+    //         url: '/uploadFile',
+    //         type: 'post',
+    //         dataType: 'json',
+    //         data: formData,
+    //         cache: false,
+    //         contentType: false,
+    //         processData: false,
+    //         success: function (data) {
+    //             console.log("上传成功")
+    //         },
+    //         xhr: function(){   //监听用于上传显示进度
+    //             var xhr = $.ajaxSettings.xhr();
+    //             if(xhr.upload) {
+    //                 xhr.upload.addEventListener("progress" , onprogress, false);
+    //                 return xhr;
+    //             }
+    //         },
+    //         error: function () {
+    //             console.log("上传失败")
+    //         }
+    //     });
+    //
+    //     function onprogress(event){
+    //         if (e.lengthComputable) {
+    //             //e.loaded 上传大小
+    //             //e.total 文件大小
+    //             var percent = e.loaded/e.total;
+    //             console.log("百分比为:per"+percent);
+    //         }
+    //     };
+    // }
 </script>

@@ -12,5 +12,12 @@
 git reset head hashid 或者idea自身 HEAD^
 
 1.注解使用
-2.文档生成
+2.文档生成swagger
 3.数据加密
+
+1.前端vue.js和element
+2.html css js jquery
+3.springboot\springcloud\dozer
+4.ngnix
+5.linux 和shell
+6.CDN和分庫分表\缓存\搜索引擎\tsf分布式缓存系统\
