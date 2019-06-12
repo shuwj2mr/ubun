@@ -29,8 +29,9 @@ public class UploadController {
         return "load....";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/uploadFile")
-    public @ResponseBody ResponseWrapper uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+    public List<String> uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
         try {
             List<MultipartFile> multipartFiles = Arrays.asList (files);
 
@@ -48,12 +49,13 @@ public class UploadController {
                 file.transferTo (new File (path));
                 list.add (path);
             }
-            return ResponseUtils.successResponse ("urls", list, "");
+
+            return list;
         } catch (IOException e) {
             e.printStackTrace ();
         } catch (IllegalStateException e) {
             e.printStackTrace ();
         }
-        return ResponseUtils.errorResponse ("");
+        return null;
     }
 }
