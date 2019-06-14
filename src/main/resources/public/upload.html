@@ -67,10 +67,7 @@
                 if (xhr.upload) {
                     xhr.upload.addEventListener("progress", function (ev) {
                         if (ev.lengthComputable) {
-                            //e.loaded 上传大小
-                            //e.total 文件大小
                             var percent = Math.floor(ev.loaded / ev.total * 100);
-                            // console.log("百分比为:per" + percent);
                             $(".bar").css("width", (percent + "%"));
                             $(".percent").text((percent + "%"));
                         }
