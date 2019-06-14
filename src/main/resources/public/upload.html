@@ -26,8 +26,7 @@
 </style>
 <body>
 <form enctype="multipart/form-data" onSubmit="return false;">
-    文件:<input type="file" name="files" multiple="multiple">
-    <!--<input type="submit" value="提交">-->
+    文件:<input type="file" name="files" multiple="multiple" id="files">
     <button onclick="sub()">提交</button>
 </form>
 <br/>
@@ -40,8 +39,14 @@
 </body>
 </html>
 <script type="text/javascript">
+
+    $("#files")[0].addEventListener("change",function () {
+        $(".bar").css("width",0);
+        $(".percent").text((0 + "%"));
+    })
+
     function sub() {
-        var files = $("input[name='files']")[0].files;
+        var files = $("input[name='files']")[0].files;  //先转化为dom对象
         var formData = new FormData();
         $.each(files,function (index,obj) {
             formData.append("files", obj);
