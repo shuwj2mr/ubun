@@ -14,6 +14,8 @@ git reset head hashid 或者idea自身 HEAD^
 1.注解使用
 2.文档生成swagger
 3.数据加密
+    常见加密方式MD5,DES,AES
+    常见的 对称加密 算法主要有 DES、3DES、AES 等，常见的 非对称算法 主要有 RSA、DSA 等，散列算法 主要有 SHA-1、MD5 等。
 
 1.前端vue.js和element
 2.html css js jquery

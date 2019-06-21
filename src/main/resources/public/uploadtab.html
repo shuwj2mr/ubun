@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传进度条显示</title>
+    <script type="text/javascript" src="../static/js/jquery.js"></script>
+</head>
+<style type="text/css">
+    .loadbar {
+        width: 200px;
+        height: 25px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+    }
+
+    .bar {
+        line-height: 25px;
+        height: 100%;
+        display: block;
+        font-family: arial;
+        font-size: 12px;
+        background-color: dodgerblue;
+        color: #fff;
+    }
+</style>
+<body>
+<form enctype="multipart/form-data" onSubmit="return false;">
+    文件:<input type="file" name="files" multiple="multiple" id="files">
+    <button onclick="sub()">提交</button>
+</form>
+<br/>
+<table>
+    <div class="loadbar">
+        <strong class="bar" style='width: 0%;'></strong><br/>
+        <span class="percent"></span>
+    </div>
+</table>
+</body>
+</html>
+<script type="text/javascript">
+
+    $("#files")[0].addEventListener("change",function () {
+        $(".bar").css("width",0);
+        $(".percent").text((0 + "%"));
+    })
+
+    function sub() {
+        var files = $("input[name='files']")[0].files;  //先转化为dom对象
+        var formData = new FormData();
+        $.each(files,function (index,obj) {
+            formData.append("files", obj);
+        })
+        $.ajax({
+            url: '/uploadFile',
+            type: 'post',
+            dataType: 'json',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log("上传成功"+data);
+            },
+            xhr: function () {   //监听用于上传显示进度
+                var xhr = $.ajaxSettings.xhr();
+                if (xhr.upload) {
+                    xhr.upload.addEventListener("progress", function (ev) {
+                        if (ev.lengthComputable) {
+                            var percent = Math.floor(ev.loaded / ev.total * 100);
+                            $(".bar").css("width", (percent + "%"));
+                            $(".percent").text((percent + "%"));
+                        }
+                    }, false);
+                    return xhr;
+                }
+            },
+            error: function () {
+                console.log("上传失败")
+            }
+        });
+    }
+</script>

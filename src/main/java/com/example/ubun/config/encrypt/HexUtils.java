@@ -1,0 +1,35 @@
+package com.example.ubun.config.encrypt;
+
+public class HexUtils {
+    /**
+     * 二进制转(16进制)字符串
+     */
+    //  shwj   s ==对应ascall表 中的 115 转化为16进制为73
+    static String parseByte2HexStr(byte buf[]) {
+        StringBuffer sb = new StringBuffer ();
+        for (int i = 0; i < buf.length; i++) {
+            String hex = Integer.toHexString (buf[i] & 0xFF);
+            if (hex.length () == 1) hex = '0' + hex;
+            sb.append (hex.toUpperCase ());
+        }
+        return sb.toString ();
+    }
+
+    /**
+     * 16进制转换成二进制
+     */
+    static byte[] parseHexStr2Byte(String hexStr) {
+        if (hexStr.length () < 1)
+            return null;
+        byte[] result = new byte[hexStr.length () / 2];
+        for (int i = 0; i < hexStr.length () / 2; i++) {
+            int high = Integer.parseInt (hexStr.substring (i * 2, i * 2 + 1), 16);
+            int low = Integer.parseInt (hexStr.substring (i * 2 + 1, i * 2 + 2), 16);
+            result[i] = (byte) (high * 16 + low);
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+    }
+}

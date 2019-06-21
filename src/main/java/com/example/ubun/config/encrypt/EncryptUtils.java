@@ -1,6 +1,4 @@
 package com.example.ubun.config.encrypt;
-import org.springframework.util.DigestUtils;
-import sun.security.provider.MD5;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
@@ -10,38 +8,44 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public class EncryptUtils {
+    private static final String secretKey = "ubun?qy::";
+    private static final String ALGORITHM = "AES";
+    private static final String ENCODE = "UTF-8";
 
     public static void main(String[] args) throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, UnsupportedEncodingException, InvalidKeyException {
+        encrypt ("kyb1");
     }
-    public static void encryptWithMD5() throws NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, UnsupportedEncodingException, BadPaddingException, IllegalBlockSizeException {
-        String src = "";//加密内容
-        String pkey = "";//秘钥
 
-        //配置--加密与解密公用的
-        KeyGenerator kgen = KeyGenerator.getInstance("DES");
-        kgen.init(56, new SecureRandom (pkey.getBytes()));
-        SecretKey secretKey = kgen.generateKey();
-        byte[] enCodeFormat = secretKey.getEncoded();
-        SecretKeySpec key = new SecretKeySpec(enCodeFormat, "DES");
+    public static void encrypt(String data) throws NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, UnsupportedEncodingException, BadPaddingException, IllegalBlockSizeException {
+        //生成响应的秘钥
+        KeyGenerator kgen = KeyGenerator.getInstance (ALGORITHM);
+        kgen.init (128, new SecureRandom (secretKey.getBytes ()));
+        SecretKey secretKey = kgen.generateKey ();
+        byte[] enCodeFormat = secretKey.getEncoded ();
+        //秘钥对象
+        SecretKeySpec key = new SecretKeySpec (enCodeFormat, ALGORITHM);
 
-        Cipher cipher = Cipher.getInstance("DES");// 创建密码器
+        Cipher cipher = Cipher.getInstance (ALGORITHM);// 创建密码器
         //加密
-        byte[] byteContent = src.getBytes("utf-8");
-        cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化加密器
-        byte[] result = cipher.doFinal(byteContent);
+        cipher.init (Cipher.ENCRYPT_MODE, key);// 初始化加密器
 
-        String p = parseByte2HexStr(result);//不可直接转成字符串
-        System.out.println ("密码:"+p);
+        //加密内容
+        byte[] byteContent = data.getBytes (ENCODE);
+        byte[] result = cipher.doFinal (byteContent);
+
+        String p = parseByte2HexStr (result);//不可直接转成字符串
+        System.out.println ("密码:" + p);
 
         //解密
-        cipher.init(Cipher.DECRYPT_MODE, key);// 初始化解密器
-        byte[] decryptFrom = parseHexStr2Byte(p);
-        byte[] result1 = cipher.doFinal(decryptFrom);
-        System.out.println("原文：" + new String(result1));
+        cipher.init (Cipher.DECRYPT_MODE, key);// 初始化解密器
+        byte[] decryptFrom = parseHexStr2Byte (p);
+        byte[] result1 = cipher.doFinal (decryptFrom);
+        System.out.println ("原文：" + new String (result1));
     }
 
     /**
      * 二进制转换成16进制，加密后的字节数组不能直接转换为字符串
+     * 2进制字符转化为 --->高八位低八位 16进制的
      */
     static String parseByte2HexStr(byte buf[]) {
         StringBuffer sb = new StringBuffer ();
