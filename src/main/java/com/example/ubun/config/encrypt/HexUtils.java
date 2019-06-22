@@ -8,7 +8,7 @@ public class HexUtils {
     static String parseByte2HexStr(byte buf[]) {
         StringBuffer sb = new StringBuffer ();
         for (int i = 0; i < buf.length; i++) {
-            String hex = Integer.toHexString (buf[i] & 0xFF);
+            String hex = Integer.toHexString (buf[i] & 0xFF);       //E88892
             if (hex.length () == 1) hex = '0' + hex;
             sb.append (hex.toUpperCase ());
         }
@@ -21,15 +21,20 @@ public class HexUtils {
     static byte[] parseHexStr2Byte(String hexStr) {
         if (hexStr.length () < 1)
             return null;
-        byte[] result = new byte[hexStr.length () / 2];
+        byte[] result = new byte[hexStr.length () / 2];          //连续2个字符表示1个字符  1211AAAA
         for (int i = 0; i < hexStr.length () / 2; i++) {
-            int high = Integer.parseInt (hexStr.substring (i * 2, i * 2 + 1), 16);
-            int low = Integer.parseInt (hexStr.substring (i * 2 + 1, i * 2 + 2), 16);
-            result[i] = (byte) (high * 16 + low);
+            /*比如12*/
+            int high = Integer.parseInt (hexStr.substring (i * 2, i * 2 + 1), 16);  //1
+            int low = Integer.parseInt (hexStr.substring (i * 2 + 1, i * 2 + 2), 16);   //2
+            result[i] = (byte) ((high<<4) + low);       //0000 0000    0000 0000  1
         }
         return result;
     }
 
     public static void main(String[] args) {
+        String a = parseByte2HexStr ("A".getBytes ());
+        System.out.println (a);
+        byte[] bytes = parseHexStr2Byte (a);
+        System.out.println (new String(bytes));
     }
 }

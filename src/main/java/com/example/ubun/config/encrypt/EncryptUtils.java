@@ -13,7 +13,7 @@ public class EncryptUtils {
     private static final String ENCODE = "UTF-8";
 
     public static void main(String[] args) throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, UnsupportedEncodingException, InvalidKeyException {
-        encrypt ("kyb1");
+        encrypt ("123456789");
     }
 
     public static void encrypt(String data) throws NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, UnsupportedEncodingException, BadPaddingException, IllegalBlockSizeException {
@@ -47,10 +47,10 @@ public class EncryptUtils {
      * 二进制转换成16进制，加密后的字节数组不能直接转换为字符串
      * 2进制字符转化为 --->高八位低八位 16进制的
      */
-    static String parseByte2HexStr(byte buf[]) {
+    static String parseByte2HexStr(byte buf[]) {                //将单个字节表示为比如A
         StringBuffer sb = new StringBuffer ();
         for (int i = 0; i < buf.length; i++) {
-            String hex = Integer.toHexString (buf[i] & 0xFF);
+            String hex = Integer.toHexString (buf[i] & 0xFF);       //41   ====16机制的字符串
             if (hex.length () == 1) {
                 hex = '0' + hex;
             }
@@ -65,12 +65,12 @@ public class EncryptUtils {
     static byte[] parseHexStr2Byte(String hexStr) {
         if (hexStr.length () < 1)
             return null;
-        byte[] result = new byte[hexStr.length () / 2];
+        byte[] result = new byte[hexStr.length () / 2];             //应为String表示的为字节的长度 /2位字符的长度
         for (int i = 0; i < hexStr.length () / 2; i++) {
-            int high = Integer.parseInt (hexStr.substring (i * 2, i * 2 + 1), 16);
-            int low = Integer.parseInt (hexStr.substring (i * 2 + 1, i * 2 + 2), 16);
-            result[i] = (byte) (high * 16 + low);
-        }
+            int high = Integer.parseInt (hexStr.substring (i * 2, i * 2 + 1), 16);          //获取字节的 高八位
+            int low = Integer.parseInt (hexStr.substring (i * 2 + 1, i * 2 + 2), 16);       //获取字节的 低八位
+            result[i] = (byte) (high * 16 + low);                                                 //获取hign*16^1+low*16^0
+         }
         return result;
     }
 
