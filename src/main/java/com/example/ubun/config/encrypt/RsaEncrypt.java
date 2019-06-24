@@ -21,9 +21,7 @@ import org.apache.commons.codec.binary.Base64;
  *  暂时不可用
  */
 public class RsaEncrypt {
-
     private static String src = "shwj";
-
     private static RSAPublicKey rsaPublicKey;
     private static RSAPrivateKey rsaPrivateKey;
 
@@ -33,7 +31,7 @@ public class RsaEncrypt {
         KeyPairGenerator keyPairGenerator;
         try {
             keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);// 64的整倍数
+            keyPairGenerator.initialize(1024);// 512的倍数
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
             rsaPublicKey = (RSAPublicKey) keyPair.getPublic();
             rsaPrivateKey = (RSAPrivateKey) keyPair.getPrivate();
