@@ -33,7 +33,7 @@ public class RsaEncrypt {
         KeyPairGenerator keyPairGenerator;
         try {
             keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(512);// 64的整倍数
+            keyPairGenerator.initialize(2048);// 64的整倍数
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
             rsaPublicKey = (RSAPublicKey) keyPair.getPublic();
             rsaPrivateKey = (RSAPrivateKey) keyPair.getPrivate();
