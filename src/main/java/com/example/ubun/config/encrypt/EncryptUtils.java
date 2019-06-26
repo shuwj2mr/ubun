@@ -13,7 +13,8 @@ public class EncryptUtils {
     private static final String ENCODE = "UTF-8";
 
     public static void main(String[] args) throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, UnsupportedEncodingException, InvalidKeyException {
-        encrypt ("123456789");
+//        encrypt ("123456789");
+        String a = parseByte2HexStr ("数".getBytes ());
     }
 
     public static void encrypt(String data) throws NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, UnsupportedEncodingException, BadPaddingException, IllegalBlockSizeException {
