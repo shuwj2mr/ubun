@@ -23,5 +23,6 @@ git reset head hashid 或者idea自身 HEAD^
 4.ngnix
 5.linux 和shell
 6.CDN和分庫分表\缓存\搜索引擎\tsf分布式缓存系统\
+7.docker
 
 https://www.cnblogs.com/softidea/p/5979570.html
