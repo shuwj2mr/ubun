@@ -23,6 +23,7 @@
         <oracle.version>11.2.0.1.0</oracle.version>
         <!--generator-->
         <test.java>${basedir}/src/test/java</test.java>
+        <start-class>com.example.ubun.UbunApplication</start-class>
     </properties>
 
     <dependencies>
@@ -125,6 +126,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <finalName>${artifactId}</finalName>
+                    <mainClass>${start-class}</mainClass>
                     <fork>true</fork>
                     <addResources>true</addResources>
                 </configuration>
