@@ -12,6 +12,13 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
+//    private final SysUserService sysUserService;
+//
+//    @Autowired
+//    public SysUserController (SysUserService sysUserService){
+//        this.sysUserService=sysUserService;
+//    }
+
     @RequestMapping("/login")
     public void login(@RequestParam() String username,
                       @RequestParam() String password) {
