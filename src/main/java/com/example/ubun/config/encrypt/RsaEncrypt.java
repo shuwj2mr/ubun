@@ -46,7 +46,7 @@ public class RsaEncrypt {
      * 公钥加密，私钥解密
      * @author jijs
      */
-    public static void pubEn2PriDe() throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, NoSuchPaddingException, BadPaddingException, IllegalBlockSizeException {
+    public static String pubKeyEncrypt(String src) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, NoSuchPaddingException, BadPaddingException, IllegalBlockSizeException {
         //公钥加密
         X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(rsaPublicKey.getEncoded());
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
@@ -54,46 +54,49 @@ public class RsaEncrypt {
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.ENCRYPT_MODE, publicKey);
         byte[] result = cipher.doFinal(src.getBytes());
-        System.out.println("公钥加密，私钥解密 --加密: " + Base64.encodeBase64String(result));
+        return Base64.encodeBase64String (result);
+    }
 
+    public static String priKeyDecrypt(String secret) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, NoSuchPaddingException, BadPaddingException, IllegalBlockSizeException {
         //私钥解密
         PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(rsaPrivateKey.getEncoded());
-        keyFactory = KeyFactory.getInstance("RSA");
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         PrivateKey privateKey = keyFactory.generatePrivate(pkcs8EncodedKeySpec);
-        cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
-        result = cipher.doFinal(result);
-        System.out.println("公钥加密，私钥解密 --解密: " + new String(result));
+        byte[] result = cipher.doFinal(Base64.decodeBase64 (secret));
+        return new String (result);
     }
+
+
 
 
     /**
      * 私钥加密，公钥解密
      * @author jijs
      */
-    public static void priEn2PubDe() throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
-
-        //私钥加密
-        PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(rsaPrivateKey.getEncoded());
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        PrivateKey privateKey = keyFactory.generatePrivate(pkcs8EncodedKeySpec);
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.ENCRYPT_MODE, privateKey);
-        byte[] result = cipher.doFinal(src.getBytes());
-        System.out.println("私钥加密，公钥解密 --加密 : " + Base64.encodeBase64String(result));
-
-        //公钥解密
-        X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(rsaPublicKey.getEncoded());
-        keyFactory = KeyFactory.getInstance("RSA");
-        PublicKey publicKey = keyFactory.generatePublic(x509EncodedKeySpec);
-        cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.DECRYPT_MODE, publicKey);
-        result = cipher.doFinal(result);
-        System.out.println("私钥加密，公钥解密   --解密: " + new String(result));
-    }
+//    public static void priEn2PubDe() throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+//
+//        //私钥加密
+//        PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(rsaPrivateKey.getEncoded());
+//        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+//        PrivateKey privateKey = keyFactory.generatePrivate(pkcs8EncodedKeySpec);
+//        Cipher cipher = Cipher.getInstance("RSA");
+//        cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+//        byte[] result = cipher.doFinal(src.getBytes());
+//        System.out.println("私钥加密，公钥解密 --加密 : " + Base64.encodeBase64String(result));
+//
+//        //公钥解密
+//        X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(rsaPublicKey.getEncoded());
+//        keyFactory = KeyFactory.getInstance("RSA");
+//        PublicKey publicKey = keyFactory.generatePublic(x509EncodedKeySpec);
+//        cipher = Cipher.getInstance("RSA");
+//        cipher.init(Cipher.DECRYPT_MODE, publicKey);
+//        result = cipher.doFinal(result);
+//        System.out.println("私钥加密，公钥解密   --解密: " + new String(result));
+//    }
 
     public static void main(String[] args) throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidKeySpecException {
-        pubEn2PriDe();  //公钥加密，私钥解密
-        priEn2PubDe();  //私钥加密，公钥解密
+        String s = priKeyDecrypt ("afKA1EL6u0Q3MbZhYuRdepOs9wCu3tts1ptG+vuRFRtb9o26ZBVp9WSU16mkWixCTaFybo5UVXX/HX56GdPCX5QAAnwkrcPcb/D0ubj0edh53lcgETbm85V5MPSC9ipv7ZF0JeEdJLroHmHPtOP4Wdl1VjgChnQHqVNntiHXD+A=");
     }
 }
