@@ -12,6 +12,7 @@ public class UbunApplication {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+//		System.setProperty ("spring.devtools.restart.enabled","false");
 		SpringApplication.run(UbunApplication.class, args);
 	}
 

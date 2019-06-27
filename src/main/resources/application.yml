@@ -33,6 +33,7 @@ spring:
     druidLoginName: wjf # 登录druid的账号
     druidPassword: wjf # 登录druid的密码
 
+
   servlet:
     multipart:
       max-file-size: 1000MB
@@ -47,6 +48,14 @@ spring:
     suffix: .html
     servlet:
       content-type: text/html
+
+
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      additional-paths: src/main/java
+      exclude: WEB-INF/*
 
 mybatis:
   config-location: classpath:mybatis/config/mybatis.cfg.xml
