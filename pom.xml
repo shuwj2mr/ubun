@@ -126,6 +126,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <fork>true</fork>
+                    <addResources>true</addResources>
                 </configuration>
             </plugin>
             <plugin>
@@ -152,5 +153,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

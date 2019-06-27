@@ -5,7 +5,6 @@ server:
     context-path: /
 
 
-
 # \u6570\u636E\u6E90
 spring:
   datasource:
